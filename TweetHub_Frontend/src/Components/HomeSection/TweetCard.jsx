@@ -23,13 +23,13 @@ import RequestCommunityNote from "@mui/icons-material/Campaign";
 
 import TweetHub_logo from "../../assets/Logo/TweetHub_logo.png";
 
-import Reply from '@mui/icons-material/ChatBubbleOutlineSharp';
-import Repost from '@mui/icons-material/RepeatSharp';
-import Like from '@mui/icons-material/FavoriteBorderSharp';
-import Favorite from '@mui/icons-material/Favorite';
-import View from '@mui/icons-material/BarChartSharp';
-import Bookmark from '@mui/icons-material/BookmarkBorderSharp';
-import Share from '@mui/icons-material/IosShare';
+import Reply from "@mui/icons-material/ChatBubbleOutlineSharp";
+import Repost from "@mui/icons-material/RepeatSharp";
+import Like from "@mui/icons-material/FavoriteBorderSharp";
+import Favorite from "@mui/icons-material/Favorite";
+import View from "@mui/icons-material/BarChartSharp";
+import Bookmark from "@mui/icons-material/BookmarkBorderSharp";
+import Share from "@mui/icons-material/IosShare";
 
 function TweetCard() {
   const navigate = useNavigate();
@@ -66,29 +66,27 @@ function TweetCard() {
 
   const handleOpenReplyModel = () => {
     console.log("Open Reply Model");
-  }
+  };
 
   const handleCreateRetweet = () => {
     console.log("Create Retweet");
-  }
+  };
 
   const handleOpenViewModel = () => {
     console.log("Open View Model");
-  }
+  };
 
   const handleOpenBookmarkModel = () => {
     console.log("Open Bookmark Model");
-  }
+  };
 
   const handleOpenShareModel = () => {
     console.log("Open Share Model");
-  }
-
+  };
 
   const handleLikeTweet = () => {
     console.log("Like Tweet");
-  }
-
+  };
 
   return (
     <div>
@@ -222,53 +220,67 @@ function TweetCard() {
             <div className="py-5 flex flex-wrap justify-between itesm-center">
               <div className="space-x-3 flex items-center text-gray-600">
                 <label>
-                  <Reply className="cursor-pointer" onClick={handleOpenReplyModel} />
-                  <p>
-                    10
-                  </p>
+                  <Reply
+                    className="cursor-pointer"
+                    onClick={handleOpenReplyModel}
+                  />
+                  <p>10</p>
                 </label>
               </div>
-              <div className={`${true ? 'text-red-500' : 'text-gray-600'} space-x-3 flex items-center `}>
-                <label >
-                  <Repost className="cursor-pointer" onClick={handleCreateRetweet} />
-                  <p>
-                    5
-                  </p>
-                </label>
-              </div>
-              <div className={`${true ? 'text-red-500' : 'text-gray-600'}  space-x-3 flex items-center`}>
+              <div
+                className={`${true ? "text-red-500" : "text-gray-600"} space-x-3 flex items-center `}
+              >
                 <label>
-                  {true ? <Favorite onClick={handleLikeTweet}
-                    className="cursor-pointer" /> : <Like
-                    onClick={handleLikeTweet}
-                    className="cursor-pointer" />}
-                  <p>
-                    20
-                  </p>
+                  <Repost
+                    className="cursor-pointer"
+                    onClick={handleCreateRetweet}
+                  />
+                  <p>5</p>
+                </label>
+              </div>
+              <div
+                className={`${true ? "text-red-500" : "text-gray-600"}  space-x-3 flex items-center`}
+              >
+                <label>
+                  {true ? (
+                    <Favorite
+                      onClick={handleLikeTweet}
+                      className="cursor-pointer"
+                    />
+                  ) : (
+                    <Like
+                      onClick={handleLikeTweet}
+                      className="cursor-pointer"
+                    />
+                  )}
+                  <p>20</p>
                 </label>
               </div>
               <div className="space-x-3 flex items-center text-gray-600">
                 <label>
-                  <View className="cursor-pointer" onClick={handleOpenViewModel} />
-                  <p>
-                    100
-                  </p>
+                  <View
+                    className="cursor-pointer"
+                    onClick={handleOpenViewModel}
+                  />
+                  <p>100</p>
                 </label>
               </div>
               <div className="space-x-3 flex items-center text-gray-600">
                 <label>
-                  <Bookmark className="cursor-pointer" onClick={handleOpenBookmarkModel} />
-                  <p>
-                    15
-                  </p>
+                  <Bookmark
+                    className="cursor-pointer"
+                    onClick={handleOpenBookmarkModel}
+                  />
+                  <p>15</p>
                 </label>
               </div>
               <div>
                 <label>
-                  <Share className="cursor-pointer" onClick={handleOpenShareModel} />
-                  <p>
-                    8
-                  </p>
+                  <Share
+                    className="cursor-pointer"
+                    onClick={handleOpenShareModel}
+                  />
+                  <p>8</p>
                 </label>
               </div>
             </div>

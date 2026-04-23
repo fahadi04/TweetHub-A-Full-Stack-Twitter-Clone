@@ -67,7 +67,7 @@ function Navigation() {
   ];
 
   return (
-    <div className="h-screen sticky top-0">
+    <div className="h-screen sticky top-0 max-w-[250px] w-full flex flex-col justify-between p-4">
       <div className="flex flex-col items-center ">
         <div className="py-3">
           <img
