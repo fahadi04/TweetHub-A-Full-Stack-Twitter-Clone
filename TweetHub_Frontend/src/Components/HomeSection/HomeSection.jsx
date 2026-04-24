@@ -52,7 +52,7 @@ function HomeSection() {
 
     return (
         <div className="space-y-2">
-                    <section className="sticky top-0 flex items-center justify-center cursor-pointer bg-gray-300 text-black w-full h-auto border-gray-600">
+                    <section className="sticky top-0 flex items-center justify-center cursor-pointer bg-gray-100 text-black w-full h-auto border-gray-400">
                         <div className="flex items-center justify-center h-full w-1/2 hover:bg-gray-900 hover:text-white transition-colors">
                             <h1 className="text-xl font-bold opacity-90  py-3">
                                 For you
