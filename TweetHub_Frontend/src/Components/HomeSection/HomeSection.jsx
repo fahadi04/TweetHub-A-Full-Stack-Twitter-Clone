@@ -1,146 +1,121 @@
-import React, { useState } from "react";
-import { Avatar } from "@mui/material";
-import ImageIcon from "@mui/icons-material/Image";
-import GifIcon from "@mui/icons-material/GifBox";
-import PollIcon from "@mui/icons-material/Poll";
-import EmojiIcon from "@mui/icons-material/EmojiEmotions";
-import ScheduleIcon from "@mui/icons-material/PendingActionsSharp";
-import Location from "@mui/icons-material/LocationPin";
-import Tooltip from "@mui/material/Tooltip";
-import { useFormik } from "formik";
-import FavoriteIcon from "@mui/icons-material/FavoriteBorder";
-import * as Yup from "yup";
-import TweetCard from "./TweetCard";
+import React, { useState, useEffect } from 'react';
+import { Box, Tabs, Tab } from '@mui/material';
+import TweetComposer from './TweetComposer';
+import TweetCard from './TweetCard';
+import { useTweets } from '../../hooks/useTweets';
+import { LoadingSpinner } from '../Common/LoadingSpinner';
 
 function HomeSection() {
-    const heroSectionIcons = [
-        { title: "Media", icon: <ImageIcon /> },
-        { title: "Gif", icon: <GifIcon /> },
-        { title: "Poll", icon: <PollIcon /> },
-        { title: "Emoji", icon: <EmojiIcon /> },
-        { title: "Schedule", icon: <ScheduleIcon /> },
-        { title: "Location", icon: <Location /> },
-    ];
+    const {
+        tweets,
+        isLoading,
+        fetchTweets,
+        createTweet,
+        likeTweet,
+        retweet,
+        bookmarkTweet,
+        deleteTweet,
+    } = useTweets();
+    const [filter, setFilter] = useState('forYou');
+    const [replyingTo, setReplyingTo] = useState(null);
 
-    const handleSubmit = (values) => {
-        console.log("Submitted values:", values);
+    useEffect(() => {
+        fetchTweets();
+    }, [fetchTweets]);
+
+    const handleCreateTweet = async (tweetData) => {
+        try {
+            await createTweet(tweetData);
+        } catch (error) {
+            console.error('Failed to create tweet:', error);
+        }
     };
 
-    const validationSchema = Yup.object().shape({
-        content: Yup.string().required("Tweet Text is required"),
-    });
-
-    const [uploadingImage, setUploadingImage] = useState(false);
-    const [selectedImage, setSelectedImage] = useState("");
-
-    const formik = useFormik({
-        initialValues: {
-            content: "",
-            image: "",
-        },
-        onSubmit: handleSubmit,
-        validationSchema,
-    });
-
-    const handleSelectImage = (event) => {
-        setUploadingImage(true);
-        const imgUrl = event.target.files[0];
-        formik.setFieldValue("image", imgUrl);
-        setSelectedImage(imgUrl);
-        setUploadingImage(false);
+    const handleReply = (tweet) => {
+        setReplyingTo(tweet);
     };
+
+    const handleRetweet = async (tweetId) => {
+        await retweet(tweetId);
+    };
+
+    const handleLike = async (tweetId) => {
+        await likeTweet(tweetId);
+    };
+
+    const handleDelete = async (tweetId) => {
+        await deleteTweet(tweetId);
+    };
+
+    const handleBookmark = async (tweetId) => {
+        await bookmarkTweet(tweetId);
+    };
+
+    const handleShare = (tweet) => {
+        const url = `${window.location.origin}/tweet/${tweet.id}`;
+        navigator.clipboard?.writeText(url);
+    };
+
+    const visibleTweets = [...tweets].sort((a, b) => {
+        if (filter === 'popular') return (b.likes || 0) + (b.retweets || 0) - ((a.likes || 0) + (a.retweets || 0));
+        if (filter === 'following') return a.author?.id === 1 ? -1 : 0;
+        return new Date(b.createdAt || 0) - new Date(a.createdAt || 0);
+    });
 
     return (
-        <div className="space-y-2">
-                    <section className="sticky top-0 flex items-center justify-center cursor-pointer bg-gray-100 text-black w-full h-auto border-gray-400">
-                        <div className="flex items-center justify-center h-full w-1/2 hover:bg-gray-900 hover:text-white transition-colors">
-                            <h1 className="text-xl font-bold opacity-90  py-3">
-                                For you
-                            </h1>
-                        </div>
-                        <div className="flex items-center justify-center h-full w-1/2 hover:bg-gray-900 hover:text-white transition-colors">
-                    <h1 className="text-xl font-bold opacity-90   py-3">
-                                Following
-                            </h1>
-                        </div>
-                    </section>
+        <Box className='timeline-page'>
+            {/* Header */}
+            <Box className='timeline-header'>
+                <Box className='timeline-title-row'>
+                    <h2>Home</h2>
+                    <span>Live demo feed</span>
+                </Box>
 
-            <section className="pb-6">
-                <div className="flex space-x-4 items-start m-3 ">
-                    <Avatar
-                        alt="username"
-                        src="/path/to/avatar.jpg"
-                        sx={{ width: 80, height: 80 }}
+                {/* Tabs */}
+                <Tabs
+                    value={filter}
+                    onChange={(e, value) => setFilter(value)}
+                    variant='fullWidth'
+                >
+                    <Tab label='For you' value='forYou' />
+                    <Tab label='Popular' value='popular' />
+                    <Tab label='Following' value='following' />
+                </Tabs>
+            </Box>
+
+            {/* Tweet Composer */}
+            <TweetComposer onTweetCreated={handleCreateTweet} />
+
+            {/* Tweets Feed */}
+            {isLoading ? (
+                <LoadingSpinner />
+            ) : visibleTweets.length === 0 ? (
+                <Box className='empty-state'>
+                    <h3>Welcome to TweetHub</h3>
+                    <p>Post something to start your timeline.</p>
+                </Box>
+            ) : (
+                visibleTweets.map((tweet) => (
+                    <TweetCard
+                        key={tweet.id}
+                        tweet={tweet}
+                        onReply={handleReply}
+                        onRetweet={handleRetweet}
+                        onLike={handleLike}
+                        onDelete={handleDelete}
+                        onBookmark={handleBookmark}
+                        onShare={handleShare}
                     />
+                ))
+            )}
 
-                    <div className="w-full flex justify-between">
-                        <form className="w-full" onSubmit={formik.handleSubmit}>
-                            <div>
-                                <input
-                                    type="text"
-                                    name="content"
-                                    placeholder="What's happening?"
-                                    className={`border-none outline-none bg-transparent text-black h-auto text-4xl font-normal p-4 w-full `}
-                                    {...formik.getFieldProps("content")}
-                                />
-
-                                {formik.errors.content && formik.touched.content && (
-                                    <span className="text-red-500">{formik.errors.content}</span>
-                                )}
-                            </div>
-                            <div className="flex justify-between p-2">
-                                <div className="flex items-center space-x-4 text-blue-500 mt-4">
-                                    <label className="flex items-center cursor-pointer space-x-2  rounded-md">
-                                        <ImageIcon className="text-[#1d9bf0]" />
-                                        <input
-                                            type="file"
-                                            accept="image/*"
-                                            className="hidden"
-                                            name="imageFile"
-                                            onChange={handleSelectImage}
-                                        />
-                                    </label>
-                                    <label className="flex items-center cursor-pointer rounded-md sapce-x-2">
-                                        <GifIcon className="text-[#1d9bf0]" />
-                                        <input type="text" className="hidden" />
-                                    </label>
-                                    <label className="flex items-center cursor-pointer rounded-md sapce-x-2">
-                                        <PollIcon className="text-[#1d9bf0]" />
-                                        <input type="text" className="hidden" />
-                                    </label>
-                                    <label className="flex items-center cursor-pointer rounded-md sapce-x-2">
-                                        <EmojiIcon className="text-[#1d9bf0]" />
-                                        <input type="text" className="hidden" />
-                                    </label>
-                                    <label className="flex items-center cursor-pointer rounded-md sapce-x-2">
-                                        <ScheduleIcon className="text-[#1d9bf0]" />
-                                        <input type="text" className="hidden" />
-                                    </label>
-                                    <label className="flex items-center cursor-pointer rounded-md sapce-x-2">
-                                        <Location className="text-[#1d9bf0]" />
-                                        <input type="text" className="hidden" />
-                                    </label>
-                                </div>
-                                <div>
-                                    <button
-                                        type="submit"
-                                        className="bg-[#1d9bf0] text-white font-bold py-4 px-8 rounded-full hover:bg-[#1a8cd8] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 ease-in-out"
-                                    >
-                                        Post
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </section>
-            <hr className="border-gray-600" />
-            <section>
-                {[1, 2, 3, 4, 5].map((item) => (
-                    <TweetCard />
-                ))}
-            </section>
-        </div>
+            {replyingTo && (
+                <Box className='reply-toast' onClick={() => setReplyingTo(null)}>
+                    Replying to @{replyingTo.author?.username}. Reply composer can be wired to your backend next.
+                </Box>
+            )}
+        </Box>
     );
 }
+
 export default HomeSection;

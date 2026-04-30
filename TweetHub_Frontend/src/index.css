@@ -1,1 +1,176 @@
 @import "tailwindcss";
+
+/* ============ CSS Variables ============ */
+:root {
+    --primary-color: #1d9bf0;
+    --hover-color: #1a8cd8;
+    --like-color: #e0245e;
+    --retweet-color: #17bf63;
+    --text-primary: #000000;
+    --text-secondary: #536471;
+    --border-color: #eff3f4;
+    --bg-white: #ffffff;
+    --bg-light: #f7f9f9;
+    --bg-hover: rgba(15, 20, 25, 0.05);
+    --shadow-soft: 0 8px 28px rgba(15, 20, 25, 0.12);
+    --surface-glow: rgba(29, 155, 240, 0.14);
+}
+
+html.dark {
+    --text-primary: #ffffff;
+    --text-secondary: #71767b;
+    --border-color: #2f3336;
+    --bg-white: #000000;
+    --bg-light: #16181c;
+    --bg-hover: rgba(239, 243, 244, 0.1);
+    --shadow-soft: 0 8px 28px rgba(255, 255, 255, 0.08);
+    --surface-glow: rgba(29, 155, 240, 0.2);
+}
+
+/* ============ Global Reset ============ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--bg-white);
+    color: var(--text-primary);
+    overscroll-behavior-y: none;
+}
+
+#root {
+    width: 100%;
+    min-height: 100vh;
+    display: block;
+}
+
+/* ============ Scrollbar Styling ============ */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+    background: #555;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
+
+/* ============ Text Selection ============ */
+::selection {
+    background-color: rgba(29, 161, 242, 0.3);
+    color: inherit;
+}
+
+html.dark ::selection {
+    background-color: rgba(29, 161, 242, 0.5);
+}
+
+.MuiPaper-root,
+.MuiDialog-paper,
+.MuiMenu-paper {
+    background-color: var(--bg-white) !important;
+    color: var(--text-primary) !important;
+}
+
+.timeline-page {
+    width: 100%;
+    min-height: 100vh;
+    background: var(--bg-white);
+}
+
+.timeline-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: color-mix(in srgb, var(--bg-white) 88%, transparent);
+    border-bottom: 1px solid var(--border-color);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 1px 0 color-mix(in srgb, var(--border-color) 70%, transparent);
+}
+
+.timeline-title-row {
+    padding: 12px 16px 8px;
+}
+
+.timeline-title-row h2 {
+    font-size: 20px;
+    line-height: 1.2;
+    font-weight: 800;
+    margin: 0;
+}
+
+.timeline-title-row span {
+    display: block;
+    margin-top: 2px;
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+.empty-state {
+    padding: 56px 32px;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.empty-state h3 {
+    color: var(--text-primary);
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.reply-toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: min(560px, calc(100vw - 32px));
+    padding: 12px 18px;
+    border-radius: 999px;
+    background: var(--primary-color);
+    color: #fff;
+    font-weight: 700;
+    box-shadow: var(--shadow-soft);
+    z-index: 2000;
+    cursor: pointer;
+    animation: toast-rise 0.24s ease-out;
+}
+
+@keyframes toast-rise {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}

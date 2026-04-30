@@ -1,55 +1,95 @@
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import HomeIcon from "@mui/icons-material/Home";
-import ExploreIcon from "@mui/icons-material/SearchSharp";
-import NotificationsIcon from "@mui/icons-material/NotificationsActiveSharp";
-import MessagesIcon from "@mui/icons-material/ChatBubbleSharp";
-import BookmarkIcon from "@mui/icons-material/BookmarkBorder";
-import ProfilesIcon from "@mui/icons-material/AccountCircleSharp";
-import MoreIcon from "@mui/icons-material/MoreHoriz";
+import SearchIcon from "@mui/icons-material/Search";
+import SearchSharpIcon from "@mui/icons-material/SearchSharp";
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import EmailIcon from "@mui/icons-material/Email";
+import AutoAwesomeOutlinedIcon from "@mui/icons-material/AutoAwesomeOutlined";
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
+import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
+import ListAltIcon from "@mui/icons-material/ListAlt";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
+import GroupsIcon from "@mui/icons-material/Groups";
+import WorkspacePremiumOutlinedIcon from "@mui/icons-material/WorkspacePremiumOutlined";
+import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 export const navigationMenu = [
   {
     name: "Home",
-    icon: <HomeIcon />,
-    path: "/home",
+    icon: <HomeOutlinedIcon />,
+    activeIcon: <HomeIcon />,
+    path: "/",
+    mobile: true,
   },
   {
     name: "Explore",
-    icon: <ExploreIcon />,
+    icon: <SearchIcon />,
+    activeIcon: <SearchSharpIcon />,
     path: "/explore",
+    mobile: true,
   },
   {
     name: "Notifications",
-    icon: <NotificationsIcon />,
+    icon: <NotificationsNoneIcon />,
+    activeIcon: <NotificationsIcon />,
     path: "/notifications",
+    badge: 3,
+    mobile: true,
   },
   {
-    name: "Follow",
-    icon: <ProfilesIcon />,
-    path: "/follow",
+    name: "Messages",
+    icon: <EmailOutlinedIcon />,
+    activeIcon: <EmailIcon />,
+    path: "/messages",
   },
   {
-    name: "Chat",
-    icon: <MessagesIcon />,
-    path: "/chat",
+    name: "Grok",
+    icon: <AutoAwesomeOutlinedIcon />,
+    activeIcon: <AutoAwesomeIcon />,
+    path: "/grok",
+  },
+  {
+    name: "Lists",
+    icon: <ListAltOutlinedIcon />,
+    activeIcon: <ListAltIcon />,
+    path: "/lists",
+  },
+  {
+    name: "Bookmarks",
+    icon: <BookmarkBorderIcon />,
+    activeIcon: <BookmarkIcon />,
+    path: "/bookmarks",
+  },
+  {
+    name: "Communities",
+    icon: <GroupsOutlinedIcon />,
+    activeIcon: <GroupsIcon />,
+    path: "/communities",
+  },
+  {
+    name: "Premium",
+    icon: <WorkspacePremiumOutlinedIcon />,
+    activeIcon: <WorkspacePremiumIcon />,
+    path: "/premium",
   },
   {
     name: "Profile",
-    icon: <ProfilesIcon />,
+    icon: <AccountCircleOutlinedIcon />,
+    activeIcon: <AccountCircleIcon />,
     path: "/profile",
+    mobile: true,
   },
   {
     name: "More",
-    icon: <MoreIcon />,
+    icon: <MoreHorizIcon />,
+    activeIcon: <MoreHorizIcon />,
     path: "/more",
   },
-  // {
-  //     name: 'Posts',
-  //     icon: <CreateStudioIcon />,
-  //     path: '/posts'
-  // },
-  // {
-  //     name: 'Accounts',
-  //     icon: <ProfilesIcon />,
-  //     path: '/accounts'
-  // }
 ];
