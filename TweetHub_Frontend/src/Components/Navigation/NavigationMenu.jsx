@@ -19,6 +19,8 @@ import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import PersonAddOutlinedIcon from "@mui/icons-material/PersonAddOutlined";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
 export const navigationMenu = [
   {
@@ -56,35 +58,17 @@ export const navigationMenu = [
     path: "/grok",
   },
   {
-    name: "Lists",
-    icon: <ListAltOutlinedIcon />,
-    activeIcon: <ListAltIcon />,
-    path: "/lists",
-  },
-  {
-    name: "Bookmarks",
-    icon: <BookmarkBorderIcon />,
-    activeIcon: <BookmarkIcon />,
-    path: "/bookmarks",
-  },
-  {
-    name: "Communities",
-    icon: <GroupsOutlinedIcon />,
-    activeIcon: <GroupsIcon />,
-    path: "/communities",
-  },
-  {
-    name: "Premium",
-    icon: <WorkspacePremiumOutlinedIcon />,
-    activeIcon: <WorkspacePremiumIcon />,
-    path: "/premium",
-  },
-  {
     name: "Profile",
     icon: <AccountCircleOutlinedIcon />,
     activeIcon: <AccountCircleIcon />,
     path: "/profile",
     mobile: true,
+  },
+  {
+    name: "Follow",
+    icon: <PersonAddOutlinedIcon />,
+    activeIcon: <PersonAddIcon />,
+    path: "/follow",
   },
   {
     name: "More",

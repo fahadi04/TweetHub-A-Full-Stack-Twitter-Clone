@@ -1,6 +1,6 @@
 export const demoUser = {
   id: 1,
-  name: 'Fahad Khan',
+  name: 'Fahad ',
   username: 'fahad',
   email: 'fahad@example.com',
   avatar: '',
@@ -16,7 +16,7 @@ export const mockTweets = [
   {
     id: 101,
     content:
-      'TweetHub is getting closer to a real social timeline: composer, actions, trends, responsive layout, and a cleaner dark mode all working together.',
+      "TweetHub is getting closer to a real social timeline: composer, actions, trends, responsive layout, and a cleaner dark mode all working together.",
     author: demoUser,
     createdAt: new Date(Date.now() - 1000 * 60 * 12).toISOString(),
     replies: 24,
@@ -30,12 +30,12 @@ export const mockTweets = [
   {
     id: 102,
     content:
-      'Frontend detail that matters: the mobile experience should not feel like a squeezed desktop page. Bottom navigation, sticky headers, and sensible spacing change everything.',
+      "Frontend detail that matters: the mobile experience should not feel like a squeezed desktop page. Bottom navigation, sticky headers, and sensible spacing change everything.",
     author: {
       id: 2,
-      name: 'Aisha Sharma',
-      username: 'aisha_codes',
-      avatar: '',
+      name: "Aisha Sharma",
+      username: "aisha_codes",
+      avatar: "",
       verified: true,
     },
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2).toISOString(),
@@ -50,12 +50,12 @@ export const mockTweets = [
   {
     id: 103,
     content:
-      'A good clone is not just matching colors. It needs the interaction rhythm: quick posting, immediate feedback, smooth tabs, discoverable actions, and empty states that still feel alive.',
+      "A good clone is not just matching colors. It needs the interaction rhythm: quick posting, immediate feedback, smooth tabs, discoverable actions, and empty states that still feel alive.",
     author: {
       id: 3,
-      name: 'Dev Studio',
-      username: 'devstudio',
-      avatar: '',
+      name: "Dev Studio",
+      username: "devstudio",
+      avatar: "",
       verified: false,
     },
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 7).toISOString(),
@@ -67,6 +67,54 @@ export const mockTweets = [
     retweeted: true,
     bookmarked: false,
   },
+  {
+    id: 104,
+    content:
+      "Building a Twitter clone is a great way to learn full-stack development. You get to work on everything from database design to API development to frontend UI/UX.",
+    author: demoUser,
+    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 12).toISOString(),
+    replies: 32,
+    retweets: 215,
+    likes: 1890,
+    views: 25600,
+    liked: true,
+    retweeted: false,
+    bookmarked: true,
+  },
+  {
+    id: 105,
+    content:
+      "Theming is more than just colors. It’s about creating a consistent visual language that makes users feel at home, whether they prefer light or dark mode.",
+    author: demoUser,
+    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 12).toISOString(),
+    replies: 15,
+    retweets: 89,
+    likes: 721,
+    views: 12300,
+    liked: false,
+    retweeted: false,
+    bookmarked: false,
+  },
+  {
+    id: 106,
+    content:
+      "Responsive design is crucial for a social app. It’s not just about fitting on smaller screens, but optimizing the layout and interactions for touch and mobile usage.",
+    author: {
+      id: 3,
+      name: "XYZUsers",
+      username: "xyzusers",
+      avatar: "",
+      verified: false,
+    },
+    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 12).toISOString(),
+    replies: 8,
+    retweets: 45,
+    likes: 389,
+    views: 6700,
+    liked: true,
+    retweeted: false,
+    bookmarked: true,
+  },
 ];
 
 export const trends = [
@@ -74,10 +122,19 @@ export const trends = [
   { category: 'Developers · Trending', title: 'Spring Boot', count: '42K posts' },
   { category: 'Design · Trending', title: 'Responsive UI', count: '18K posts' },
   { category: 'India · Trending', title: 'Full Stack Projects', count: '9,642 posts' },
+  { category: 'Programming · Trending', title: 'Open Source', count: '76K posts' },
+{ category: 'Web Development · Trending', title: 'Frontend Frameworks', count: '34K posts' },
+{ category: 'Software Engineering · Trending', title: 'Clean Code', count: '22K posts' },
+{ category: 'Tech News · Trending', title: 'AI in 2024', count: '15K posts' },
 ];
 
 export const followSuggestions = [
   { id: 4, name: 'Maya Patel', username: 'maya_designs', verified: true },
   { id: 5, name: 'Code Daily', username: 'codedaily', verified: false },
   { id: 6, name: 'Spring Tips', username: 'springtips', verified: true },
+  { id: 7, name: 'UI/UX Hub', username: 'uiuxhub', verified: false },
+  { id: 8, name: 'Tech Trends', username: 'techtrends', verified: true },
+{ id: 9, name: 'DevTalks', username: 'devtalks', verified: false },
+{ id: 10, name: 'Open Source World', username: 'opensourceworld', verified: true },
+
 ];

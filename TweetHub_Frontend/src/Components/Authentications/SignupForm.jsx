@@ -7,15 +7,19 @@ import {
     TextField,
     Button,
     Box,
-    Typography,
     Alert,
     CircularProgress,
     InputAdornment,
-    LinearProgress,
 } from '@mui/material';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import CancelIcon from '@mui/icons-material/Cancel';
 import TweetHub_logo from '../../assets/Logo/TweetHub_logo.png';
+import PersonIcon from '@mui/icons-material/Person';
+import EmailIcon from '@mui/icons-material/Email';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LockIcon from '@mui/icons-material/Lock';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { getPasswordStrength } from '../../utils/validation';
 
 const SignupForm = ({ onSwitchToLogin }) => {
@@ -23,6 +27,8 @@ const SignupForm = ({ onSwitchToLogin }) => {
     const { register, isLoading, error } = useAuth();
     const [localError, setLocalError] = useState('');
     const [passwordStrength, setPasswordStrength] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const validationSchema = Yup.object().shape({
         name: Yup.string()
@@ -74,64 +80,85 @@ const SignupForm = ({ onSwitchToLogin }) => {
         setPasswordStrength(getPasswordStrength(e.target.value));
     };
 
-    const getStrengthColor = () => {
+    const getStrengthLevel = () => {
+        if (!formik.values.password) return 'none';
         switch (passwordStrength) {
             case 'Weak':
-                return 'error';
+                return 'weak';
             case 'Fair':
-                return 'warning';
+                return 'fair';
             case 'Good':
-                return 'info';
+                return 'good';
             case 'Strong':
-                return 'success';
+                return 'strong';
             default:
-                return 'inherit';
+                return 'none';
         }
     };
 
-    return (
-        <Box className="w-full max-w-md">
-            <Box className="text-center mb-8">
-                <img src={TweetHub_logo} alt="TweetHub" className="w-16 h-16 mx-auto mb-4" />
-                <Typography variant="h4" className="font-bold">
-                    Create your TweetHub account
-                </Typography>
-            </Box>
+    const isPasswordMatch = formik.values.password === formik.values.confirmPassword && formik.values.password;
 
+    return (
+        <Box>
+            {/* Logo Section */}
+            <div className="auth-logo-section">
+                <div className="auth-logo">
+                    <img src={TweetHub_logo} alt="TweetHub" />
+                </div>
+                <h1 className="auth-title">Join TweetHub</h1>
+                <p className="auth-subtitle">Create an account and start sharing your thoughts</p>
+            </div>
+
+            {/* Error Alert */}
             {(error || localError) && (
-                <Alert severity="error" className="mb-4">
+                <Alert severity="error" className="auth-alert">
                     {error || localError}
                 </Alert>
             )}
 
-            <form onSubmit={formik.handleSubmit}>
+            {/* Form */}
+            <form onSubmit={formik.handleSubmit} className="auth-form">
                 <TextField
                     fullWidth
                     name="name"
                     label="Full Name"
                     variant="outlined"
-                    margin="normal"
                     value={formik.values.name}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     error={formik.touched.name && Boolean(formik.errors.name)}
                     helperText={formik.touched.name && formik.errors.name}
                     disabled={isLoading}
+                    placeholder="John Doe"
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <PersonIcon sx={{ color: '#64748b', fontSize: 20 }} />
+                            </InputAdornment>
+                        ),
+                    }}
                 />
 
                 <TextField
                     fullWidth
                     name="email"
-                    label="Email"
+                    label="Email Address"
                     type="email"
                     variant="outlined"
-                    margin="normal"
                     value={formik.values.email}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     error={formik.touched.email && Boolean(formik.errors.email)}
                     helperText={formik.touched.email && formik.errors.email}
                     disabled={isLoading}
+                    placeholder="you@example.com"
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <EmailIcon sx={{ color: '#64748b', fontSize: 20 }} />
+                            </InputAdornment>
+                        ),
+                    }}
                 />
 
                 <TextField
@@ -139,86 +166,132 @@ const SignupForm = ({ onSwitchToLogin }) => {
                     name="username"
                     label="Username"
                     variant="outlined"
-                    margin="normal"
                     value={formik.values.username}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     error={formik.touched.username && Boolean(formik.errors.username)}
                     helperText={formik.touched.username && formik.errors.username}
                     disabled={isLoading}
+                    placeholder="@username"
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <AccountCircleIcon sx={{ color: '#64748b', fontSize: 20 }} />
+                            </InputAdornment>
+                        ),
+                    }}
                 />
 
                 <TextField
                     fullWidth
                     name="password"
                     label="Password"
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     variant="outlined"
-                    margin="normal"
                     value={formik.values.password}
                     onChange={handlePasswordChange}
                     onBlur={formik.handleBlur}
                     error={formik.touched.password && Boolean(formik.errors.password)}
                     helperText={formik.touched.password && formik.errors.password}
                     disabled={isLoading}
+                    placeholder="Create a strong password"
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <LockIcon sx={{ color: '#64748b', fontSize: 20 }} />
+                            </InputAdornment>
+                        ),
+                        endAdornment: (
+                            <InputAdornment
+                                position="end"
+                                sx={{ cursor: 'pointer' }}
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                                {showPassword ? (
+                                    <VisibilityOffIcon sx={{ color: '#64748b', fontSize: 20 }} />
+                                ) : (
+                                    <VisibilityIcon sx={{ color: '#64748b', fontSize: 20 }} />
+                                )}
+                            </InputAdornment>
+                        ),
+                    }}
                 />
 
+                {/* Password Strength Indicator */}
                 {formik.values.password && (
-                    <Box className="my-2">
-                        <Box className="flex justify-between items-center mb-1">
-                            <Typography variant="caption">Password Strength: {passwordStrength}</Typography>
-                        </Box>
-                        <LinearProgress
-                            variant="determinate"
-                            value={
-                                passwordStrength === 'Weak' ? 25 :
-                                    passwordStrength === 'Fair' ? 50 :
-                                        passwordStrength === 'Good' ? 75 : 100
-                            }
-                            color={getStrengthColor()}
-                        />
-                    </Box>
+                    <div className={`password-strength strength-${getStrengthLevel()}`}>
+                        <div className="strength-meter">
+                            <div className="strength-bar"></div>
+                        </div>
+                        <span className="strength-text">{passwordStrength || 'Unknown'}</span>
+                    </div>
                 )}
 
                 <TextField
                     fullWidth
                     name="confirmPassword"
                     label="Confirm Password"
-                    type="password"
+                    type={showConfirmPassword ? 'text' : 'password'}
                     variant="outlined"
-                    margin="normal"
                     value={formik.values.confirmPassword}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
                     helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
                     disabled={isLoading}
+                    placeholder="Re-enter your password"
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <LockIcon sx={{ color: '#64748b', fontSize: 20 }} />
+                            </InputAdornment>
+                        ),
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                {formik.values.confirmPassword && (
+                                    <Box
+                                        sx={{ cursor: 'pointer' }}
+                                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                    >
+                                        {isPasswordMatch ? (
+                                            <CheckIcon sx={{ color: '#10b981', fontSize: 20 }} />
+                                        ) : (
+                                            <CloseIcon sx={{ color: '#f87171', fontSize: 20 }} />
+                                        )}
+                                    </Box>
+                                )}
+                            </InputAdornment>
+                        ),
+                    }}
                 />
 
                 <Button
                     fullWidth
                     variant="contained"
-                    color="primary"
                     type="submit"
-                    className="mt-6 py-3 font-bold text-lg"
+                    className="auth-submit-btn"
                     disabled={isLoading}
                 >
-                    {isLoading ? <CircularProgress size={24} /> : 'Sign Up'}
+                    {isLoading ? (
+                        <CircularProgress size={20} sx={{ color: '#ffffff' }} />
+                    ) : (
+                        'Create Account'
+                    )}
                 </Button>
             </form>
 
-            <Box className="mt-6 text-center">
-                <Typography variant="body2">
-                    Already have an account?{' '}
+            {/* Toggle to Login */}
+            <div className="auth-toggle">
+                <span className="auth-toggle-text">
+                    Already have an account?
                     <Button
-                        color="primary"
+                        className="auth-toggle-btn"
                         onClick={onSwitchToLogin}
-                        style={{ textTransform: 'none' }}
                     >
                         Sign in
                     </Button>
-                </Typography>
-            </Box>
+                </span>
+            </div>
         </Box>
     );
 };

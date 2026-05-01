@@ -128,17 +128,17 @@ const TweetCard = ({
                     />
 
                     {/* Content */}
-                    <div className="flex-1 min-w-0">
+                    <div className="flex-1 min-w-0 font-bold text-lg">
                         {/* Header */}
                         <div className="flex items-center justify-between mb-1">
                             <div className="flex items-center gap-2 flex-wrap">
-                                <span className="font-bold text-gray-900 hover:underline">
+                                <span className="font-bold text-3xl text-gray-900 hover:underline">
                                     {tweet.author.name}
                                 </span>
                                 {tweet.author.verified && (
                                     <VerifiedIcon sx={{ fontSize: 18, color: '#1d9bf0' }} />
                                 )}
-                                <span className="text-gray-500">@{tweet.author.username}</span>
+                                <span className="text-gray-500 text-xl">@{tweet.author.username}</span>
                                 <span className="text-gray-500">·</span>
                                 <Tooltip title={new Date(tweet.createdAt).toLocaleString()}>
                                     <span className="text-gray-500 hover:underline">

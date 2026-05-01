@@ -1,5 +1,4 @@
-/* ============ HomePage Responsive Layout ============ */
-
+/*   */
 .homepage-container {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
@@ -8,18 +7,18 @@
     background-color: var(--bg-white);
 }
 
-/* ============ Desktop Layout (1024px+) ============ */
+/*  Desktop Layout */
 @media (min-width: 1024px) {
     .homepage-container {
-        grid-template-columns: minmax(220px, 24vw) minmax(600px, 1fr) minmax(320px, 28vw);
-        width: 100vw;
-        max-width: none;
+        grid-template-columns: 275px minmax(600px, 1fr) minmax(320px, 1fr);
+        width: 100%;
+        max-width: 100%;
         margin: 0;
         gap: 0;
     }
 }
 
-/* ============ Tablet Layout (640px - 1023px) ============ */
+/* Tablet Layout*/
 @media (min-width: 640px) and (max-width: 1023px) {
     .homepage-container {
         grid-template-columns: minmax(0, 1fr);
@@ -47,7 +46,7 @@
     }
 }
 
-/* ============ Mobile Layout (< 640px) ============ */
+/* Mobile Layout*/
 @media (max-width: 639px) {
     .homepage-container {
         grid-template-columns: minmax(0, 1fr);
@@ -68,18 +67,20 @@
     }
 }
 
-/* ============ Left Sidebar ============ */
+/*  Left Sidebar */
 .sidebar-left {
     position: sticky;
     top: 0;
     height: 100vh;
     overflow-y: auto;
+    overflow-x: hidden;
     border-right: 1px solid var(--border-color);
     padding: 0;
     display: flex;
     flex-direction: column;
     background-color: var(--bg-white);
     z-index: 10;
+    width: 275px;
 }
 
 @media (max-width: 1023px) {
@@ -89,7 +90,7 @@
     }
 }
 
-/* ============ Main Content ============ */
+/*  Main Content */
 .main-content {
     display: flex;
     flex-direction: column;
@@ -100,6 +101,7 @@
     overflow-x: hidden;
     border-left: 1px solid var(--border-color);
     border-right: 1px solid var(--border-color);
+    font-size: 16px;
 }
 
 @media (max-width: 639px) {
@@ -110,7 +112,7 @@
     }
 }
 
-/* ============ Right Sidebar ============ */
+/*  Right Sidebar */
 .sidebar-right {
     position: sticky;
     top: 0;
@@ -123,7 +125,7 @@
     z-index: 10;
 }
 
-/* ============ Scrollbar Styling for Sidebars ============ */
+/*  Scrollbar Styling for Sidebars  */
 .sidebar-left::-webkit-scrollbar,
 .sidebar-right::-webkit-scrollbar,
 .main-content::-webkit-scrollbar {
@@ -155,7 +157,7 @@ html.dark .main-content::-webkit-scrollbar-thumb:hover {
     background: #777;
 }
 
-/* ============ Utility Classes ============ */
+/*  Utility Classes  */
 .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;

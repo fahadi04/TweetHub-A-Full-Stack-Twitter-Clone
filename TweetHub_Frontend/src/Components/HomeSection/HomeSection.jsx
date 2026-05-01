@@ -65,12 +65,7 @@ function HomeSection() {
     return (
         <Box className='timeline-page'>
             {/* Header */}
-            <Box className='timeline-header'>
-                <Box className='timeline-title-row'>
-                    <h2>Home</h2>
-                    <span>Live demo feed</span>
-                </Box>
-
+            <Box className='timeline-header sticky top-0 z-10 bg-white border-b'>
                 {/* Tabs */}
                 <Tabs
                     value={filter}

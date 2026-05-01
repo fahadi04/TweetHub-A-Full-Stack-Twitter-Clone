@@ -91,6 +91,41 @@ html.dark .border-gray-200 {
     scrollbar-width: none;
 }
 
+/* ============ Main Content Font Size Increases ============ */
+.main-content .text-base {
+    font-size: 20px !important;
+}
+
+.main-content .text-sm {
+    font-size: 17px !important;
+}
+
+.main-content .text-xs {
+    font-size: 15px !important;
+}
+
+.main-content p {
+    font-size: 16px !important;
+}
+
+.main-content .text-gray-900 {
+    font-size: 16px !important;
+}
+
+.main-content .text-gray-500,
+.main-content .text-gray-600,
+.main-content .text-gray-700 {
+    font-size: 15px !important;
+}
+
+.main-content .font-bold {
+    font-size: 16px !important;
+}
+
+.interactive-card p {
+    font-size: 16px !important;
+}
+
 /* Hover Effects */
 .hover-gray:hover {
     background-color: rgba(0, 0, 0, 0.05);
